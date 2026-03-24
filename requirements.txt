@@ -1,7 +1,7 @@
 streamlit
-crewai
-langchain
-openai
+crewai>=0.30.0
+langchain>=0.2.0
+openai>=1.14.3
 python-dotenv
 google-generativeai
 requests
