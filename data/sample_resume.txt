@@ -1,0 +1,7 @@
+John Doe
+Python Developer
+
+Skills:
+- Python
+- Machine Learning
+- SQL
