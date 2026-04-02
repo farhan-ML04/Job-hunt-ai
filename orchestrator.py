@@ -24,6 +24,16 @@ def run_pipeline(jd, resume):
     )
 
     result = crew.kickoff()
-    return {
-    "output": result
+
+# Split outputs manually
+sections = result.split("Task")
+
+jd_output = sections[1] if len(sections) > 1 else result
+resume_output = sections[2] if len(sections) > 2 else result
+cover_output = sections[3] if len(sections) > 3 else result
+
+return {
+    "jd_analysis": jd_output,
+    "resume": resume_output,
+    "cover_letter": cover_output
 }
