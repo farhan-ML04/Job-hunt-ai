@@ -7,13 +7,13 @@ from utils.llm import get_llm
 
 def run_pipeline(jd, resume):
 
-    # Step 1: JD Analysis
+    # Step 1
     task1 = jd_task(jd_analyst, jd)
 
-    # Step 2: Resume Improvement
+    # Step 2
     task2 = resume_task(resume_agent, resume, "Extracted skills from JD")
 
-    # Step 3: Cover Letter
+    # Step 3
     task3 = cover_letter_task(messaging_agent, resume, jd)
 
     crew = Crew(
@@ -25,15 +25,20 @@ def run_pipeline(jd, resume):
 
     result = crew.kickoff()
 
-# Split outputs manually
-sections = result.split("Task")
+    # Split outputs manually
+    sections = result.split("Task")
 
-jd_output = sections[1] if len(sections) > 1 else result
-resume_output = sections[2] if len(sections) > 2 else result
-cover_output = sections[3] if len(sections) > 3 else result
+    if len(sections) >= 4:
+        jd_output = sections[1]
+        resume_output = sections[2]
+        cover_output = sections[3]
+    else:
+        jd_output = result
+        resume_output = result
+        cover_output = result
 
-return {
-    "jd_analysis": jd_output,
-    "resume": resume_output,
-    "cover_letter": cover_output
-}
+    return {
+        "jd_analysis": jd_output,
+        "resume": resume_output,
+        "cover_letter": cover_output
+    }
