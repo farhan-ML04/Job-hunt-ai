@@ -24,10 +24,6 @@ def run_pipeline(jd, resume):
     )
 
     result = crew.kickoff()
-    outputs = result.tasks_output
-
     return {
-    "jd_analysis": outputs[0].raw,
-    "resume": outputs[1].raw,
-    "cover_letter": outputs[2].raw
+    "output": result
 }
